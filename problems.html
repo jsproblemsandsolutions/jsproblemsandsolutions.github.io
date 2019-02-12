@@ -1,0 +1,2996 @@
+1. Write the function isEmpty(obj) which returns true if the object has no properties, false otherwise.
+Should work like that:
+
+let schedule = {};
+alert( isEmpty(schedule) ); // true
+schedule["8:30"] = "get up";
+alert( isEmpty(schedule) );
+
+2. We have an object storing salaries of our team:
+
+let salaries = {
+  John: 100,
+  Ann: 160,
+  Pete: 130
+}
+Write the code to sum all salaries and store in the variable sum. Should be 390 in the example above.
+If salaries is empty, then the result must be 0
+
+3. Create a function multiplyNumeric(obj) that multiplies all numeric properties of obj by 2.
+
+For instance:
+
+// before the call
+let menu = {
+  width: 200,
+  height: 300,
+  title: "My menu"
+};
+
+multiplyNumeric(menu);
+
+// after the call
+menu = {
+  width: 400,
+  height: 600,
+  title: "My menu"
+};
+Please note that multiplyNumeric does not need to return anything. It should modify the object in-place.
+
+4. let user = {
+  name: "John",
+  money: 1000
+};
+
+// conversions demo:
+alert(user); // should print -> {name: "John"}
+alert(+user); // should print -> 1000
+alert(user + 500); // should print -> 1500
+
+5. let user = {
+  name: "John"
+};
+
+alert(user); // toString -> John
+alert(user + 500); // toString -> John500
+
+6. Add a property to the following object so that the following usage of the object works:
+
+function makeUser() {
+  return {
+    name: "John"
+  };
+};
+
+let user = makeUser();
+alert( user.ref.name );// this should work and return appropriate name ("John")
+
+
+
+7. Create an object calculator with three methods:
+
+- read() prompts for two values and saves them as object properties.
+- sum() returns the sum of saved values.
+- mul() multiplies saved values and returns the result.
+
+8. There’s a ladder object that allows to go up and down:
+
+let ladder = {
+  step: 0,
+  up() {
+    this.step++;
+  },
+  down() {
+    this.step--;
+  },
+  showStep: function() { // shows the current step
+    alert( this.step );
+  }
+};
+Now, if we need to make several calls in sequence, can do it like this:
+
+ladder.up();
+ladder.up();
+ladder.down();
+ladder.showStep(); // 1
+
+Modify the code of up and down to make the calls chainable, like this:
+
+ladder.up().up().down().showStep(); // 1
+
+9. Create a constructor function Calculator that creates objects with 3 methods:
+
+- read() asks for two values using prompt and remembers them in object properties.
+- sum() returns the sum of these properties.
+- mul() returns the multiplication product of these properties.
+
+10. Create a constructor function Accumulator(startingValue).
+
+Object that it creates should:
+
+Store the “current value” in the property value. The starting value is set to the argument of the constructor startingValue.
+The read() method should use prompt to read a new number and add it to value.
+In other words, the value property is the sum of all user-entered values with the initial value startingValue.
+
+Here’s the demo of the code:
+
+let accumulator = new Accumulator(1); // initial value 1
+accumulator.read(); // adds the user-entered value
+accumulator.read(); // adds the user-entered value
+alert(accumulator.value); // shows the sum of these values
+
+
+
+11. Write a JS code to have following series as output
+Note: Use arrays
+
+Initial input  1 1 1 0 0 0 0
+next output    0 1 1 1 0 0 0 
+next output    0 0 1 1 1 0 0
+next output    ....
+next output    0 0 0 0 1 1 1 
+next output    1 0 0 0 0 1 1
+
+12. Write the function camelize(str) that changes dash-separated words like “my-short-string” into camel-cased “myShortString”.
+That is: removes all dashes, each word after dash becomes uppercased.
+
+Examples:
+camelize("background-color") == 'backgroundColor';
+camelize("list-style-image") == 'listStyleImage';
+camelize("-webkit-transition") == 'WebkitTransition';
+
+13. Write a function filterRange(arr, a, b) that gets an array arr, looks for elements between a and b in it and returns an array of them.
+The function should not modify the array. It should return the new array.
+
+For instance:
+let arr = [5, 3, 8, 1];
+let filtered = filterRange(arr, 1, 4);
+alert( filtered ); // 3,1 (matching values)
+alert( arr ); // 5,3,8,1 (not modified)
+
+14. Write a function filterRangeInPlace(arr, a, b) that gets an array arr and removes from it all values except those that are between a and b. The test is: a ≤ arr[i] ≤ b.
+The function should only modify the array. It should not return anything.
+
+For instance:
+let arr = [5, 3, 8, 1];
+filterRangeInPlace(arr, 1, 4); // removed the numbers except from 1 to 4
+alert( arr ); // [3, 1]
+
+15. let arr = [5, 2, 1, -10, 8];
+
+alert( arr ); // 8, 5, 2, 1, -10
+
+16. We have an array of strings arr. We’d like to have a sorted copy of it, but keep arr unmodified.
+Create a function copySorted(arr) that returns such a copy.
+
+let arr = ["HTML", "JavaScript", "CSS"];
+let sorted = copySorted(arr);
+
+alert( sorted ); // CSS, HTML, JavaScript
+alert( arr ); // HTML, JavaScript, CSS (no changes)
+
+17. Create a constructor function Calculator that creates “extendable” calculator objects.
+
+The task consists of two parts.
+
+First, implement the method calculate(str) that takes a string like "1 + 2" in the format “NUMBER operator NUMBER” (space-delimited) and returns the result. Should understand plus + and minus -.
+
+Usage example:
+
+let calc = new Calculator;
+
+alert( calc.calculate("3 + 7") ); // 10
+Then add the method addMethod(name, func) that teaches the calculator a new operation. It takes the operator name and the two-argument function func(a,b) that implements it.
+
+For instance, let’s add the multiplication *, division / and power **:
+
+let powerCalc = new Calculator;
+powerCalc.addMethod("*", (a, b) => a * b);
+powerCalc.addMethod("/", (a, b) => a / b);
+powerCalc.addMethod("**", (a, b) => a ** b);
+
+let result = powerCalc.calculate("2 ** 3");
+alert( result ); // 8
+No brackets or complex expressions in this task.
+The numbers and the operator are delimited with exactly one space.
+There may be error handling if you’d like to add it.
+
+
+
+18. You have an array of user objects, each one has user.name. Write the code that converts it into an array of names.
+
+For instance:
+
+let john = { name: "John", age: 25 };
+let pete = { name: "Pete", age: 30 };
+let mary = { name: "Mary", age: 28 };
+
+let users = [ john, pete, mary ];
+
+let names = /* ... your code */
+alert( names ); // John, Pete, Mary
+
+
+
+19. You have an array of user objects, each one has name, surname and id.
+
+Write the code to create another array from it, of objects with id and fullName, where fullName is generated from name and surname.
+
+For instance:
+
+let john = { name: "John", surname: "Smith", id: 1 };
+let pete = { name: "Pete", surname: "Hunt", id: 2 };
+let mary = { name: "Mary", surname: "Key", id: 3 };
+
+let users = [ john, pete, mary ];
+
+let usersMapped = /* ... your code ... */
+
+/*
+usersMapped = [
+  { fullName: "John Smith", id: 1 },
+  { fullName: "Pete Hunt", id: 2 },
+  { fullName: "Mary Key", id: 3 }
+]
+*/
+
+alert( usersMapped[0].id ) // 1
+alert( usersMapped[0].fullName ) // John Smith
+So, actually you need to map one array of objects to another. Try using => here. There’s a small catch.
+
+
+
+20. Write the function sortByName(users) that gets an array of objects with property name and sorts it.
+
+For instance:
+
+let john = { name: "John", age: 25 };
+let pete = { name: "Pete", age: 30 };
+let mary = { name: "Mary", age: 28 };
+
+let arr = [ john, pete, mary ];
+
+sortByName(arr);
+
+// now: [john, mary, pete]
+alert(arr[1].name); // Mary
+
+
+
+21. Let arr be an array.
+
+Create a function unique(arr) that should return an array with unique items of arr.
+
+For instance:
+
+function unique(arr) {
+  /* your code */
+}
+
+let strings = ["Hare", "Krishna", "Hare", "Krishna",
+  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+];
+
+alert( unique(strings) ); // Hare, Krishna, :-O
+
+22. We have an object:
+
+let user = {
+  name: "John",
+  years: 30
+};
+
+name property into the variable name.
+years property into the variable age.
+isAdmin property into the variable isAdmin (false if absent)
+The values after the assignment should be:
+
+let user = { name: "John", years: 30 };
+
+// your code to the left side:
+// ... = user
+
+alert( name ); // John
+alert( age ); // 30
+alert( isAdmin ); // false
+
+
+23. There is a salaries object:
+
+let salaries = {
+  "John": 100,
+  "Pete": 300,
+  "Mary": 250
+};
+Create the function topSalary(salaries) that returns the name of the top-paid person.
+
+If salaries is empty, it should return null.
+If there are multiple top-paid persons, return any of them.
+
+
+
+24. Create a function randomInteger(min, max) that generates a random integer number from min to max including both min and max as possible values.
+
+Any number from the interval min..max must appear with the same probability.
+
+Examples of its work:
+
+alert( random(1, 5) ); // 1
+alert( random(1, 5) ); // 3
+alert( random(1, 5) ); // 5
+
+
+
+25. Write a function getWeekDay(date) to show the weekday in short format: ‘MO’, ‘TU’, ‘WE’, ‘TH’, ‘FR’, ‘SA’, ‘SU’.
+
+For instance:
+
+let date = new Date(2012, 0, 3);  // 3 Jan 2012
+alert( getWeekDay(date) );        // should output "TU"
+
+
+
+26. European countries have days of week starting with Monday (number 1), then Tuesday (number 2) and till Sunday (number 7). Write a function getLocalDay(date) that returns the “European” day of week for date.
+
+let date = new Date(2012, 0, 3);  // 3 Jan 2012
+alert( getLocalDay(date) );       // tuesday, should show 2
+
+
+
+27. Create a function getDateAgo(date, days) to return the day of month days ago from the date.
+
+For instance, if today is 20th, then getDateAgo(new Date(), 1) should be 19th and getDateAgo(new Date(), 2) should be 18th.
+
+Should also work over months/years reliably:
+
+let date = new Date(2015, 0, 2);
+
+alert( getDateAgo(date, 1) ); // 1, (1 Jan 2015)
+alert( getDateAgo(date, 2) ); // 31, (31 Dec 2014)
+alert( getDateAgo(date, 365) ); // 2, (2 Jan 2014)
+P.S. The function should not modify the given date.
+
+
+
+28. Write a function getLastDayOfMonth(year, month) that returns the last day of month. Sometimes it is 30th, 31st or even 28/29th for Feb.
+
+Parameters:
+
+year – four-digits year, for instance 2012.
+month – month, from 0 to 11.
+For instance, getLastDayOfMonth(2012, 1) = 29 (leap year, Feb).
+
+
+
+29. Write a function getSecondsToday() that returns the number of seconds from the beginning of today.
+
+For instance, if now 10:00 am, and there was no daylight savings shift, then:
+
+getSecondsToday() == 36000 // (3600 * 10)
+The function should work in any day. That is, it should not have a hard-coded value of “today”.
+
+
+
+30. Create a function getSecondsToTomorrow() that returns the number of seconds till tomorrow.
+
+For instance, if now is 23:00, then:
+
+getSecondsToTomorrow() == 3600
+P.S. The function should work at any day, the “today” is not hardcoded.
+
+
+
+31. Write a function formatDate(date) that should format date as follows:
+
+If since date passed less than 1 second, then "right now".
+Otherwise, if since date passed less than 1 minute, then "n sec. ago".
+Otherwise, if less than an hour, then "m min. ago".
+Otherwise, the full date in the format "DD.MM.YY HH:mm". That is: "day.month.year hours:minutes", all in 2-digit format, e.g. 31.12.16 10:00.
+For instance:
+
+alert( formatDate(new Date(new Date - 1)) ); // "right now"
+
+alert( formatDate(new Date(new Date - 30 * 1000)) ); // "30 sec. ago"
+
+alert( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 min. ago"
+
+// yesterday's date like 31.12.2016, 20:00
+alert( formatDate(new Date(new Date - 86400 * 1000)) );
+
+
+
+32. Write a function ucFirst(str) that returns the string str with the uppercased first character, for instance:
+
+E.g.:
+ucFirst("john") == "John";
+
+33. Write a function checkSpam(str) that returns true if str contains ‘viagra’ or ‘XXX’, otherwise `false.
+
+The function must be case-insensitive:
+
+checkSpam('buy ViAgRA now') == true
+checkSpam('free xxxxx') == true
+checkSpam("innocent rabbit") == false
+
+34. Create a function truncate(str, maxlength) that checks the length of the str and, if it exceeds maxlength – replaces the end of str with the ellipsis character "…", to make its length equal to maxlength.
+
+The result of the function should be the truncated (if needed) string.
+
+For instance:
+
+truncate("What I'd like to tell on this topic is:", 20) = "What I'd like to te…"
+
+truncate("Hi everyone!", 20) = "Hi everyone!"
+
+35. We have a cost in the form "$120". That is: the dollar sign goes first, and then the number.
+
+Create a function extractCurrencyValue(str) that would extract the numeric value from such string and return it.
+
+The example:
+alert( extractCurrencyValue('$120') === 120 ); // true
+
+
+
+36. Let arr be an array.
+
+Create a function unique(arr) that should return an array with unique items of arr.
+
+For instance:
+
+function unique(arr) {
+  /* your code */
+}
+
+let values = ["Hare", "Krishna", "Hare", "Krishna",
+  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+];
+
+alert( unique(values) ); // Hare, Krishna, :-O
+P.S. Here strings are used, but can be values of any type.
+
+
+
+
+37. Anagrams are words that have the same number of same letters, but in different order.
+
+For instance:
+
+nap - pan
+ear - are - era
+cheaters - hectares - teachers
+Write a function aclean(arr) that returns an array cleaned from anagrams.
+
+For instance:
+
+let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+alert( aclean(arr) ); // "nap,teachers,ear" or "PAN,cheaters,era"
+From every anagram group should remain only one word, no matter which one.
+
+
+38. There’s an array of messages:
+
+let messages = [
+    {text: "Hello", from: "John"},
+    {text: "How goes?", from: "John"},
+    {text: "See you soon", from: "Alice"}
+];
+Your code can access it, but the messages are managed by someone else’s code. New messages are added, old ones are removed regularly by that code, and you don’t know the exact moments when it happens.
+
+Now, which data structure you could use to store information whether the message “have been read”? The structure must be well-suited to give the answer “was it read?” for the given message object.
+
+P.S. When a message is removed from messages, it should disappear from your structure as well.
+
+P.P.S. We shouldn’t modify message objects directly. If they are managed by someone else’s code, then adding extra properties to them may have bad consequences.
+
+
+39. There’s an array of messages as in the previous task. The situation is similar.
+
+let messages = [
+    {text: "Hello", from: "John"},
+    {text: "How goes?", from: "John"},
+    {text: "See you soon", from: "Alice"}
+];
+The question now is: which data structure you’d suggest to store the information: “when the message was read?”.
+
+In the previous task we only needed to store the “yes/no” fact. Now we need to store the date and it, once again, should disappear if the message is gone.
+
+
+40. Write a function getSecondLargest(nums). 
+It has one parameter: an array, nums, of n numbers. The function must find and return the second largest number in nums.
+
+nums = [2, 3, 6, 6, 5];
+Output: 5
+
+
+
+41. let room = {
+  guest: "SpanIdea"
+};
+
+Modify the above obhect to have the following output:
+Expected output: 
+
+alert( JSON.stringify(room) ); // SpanIdea
+
+42. In simple cases of circular references, we can exclude an offending property from serialization by its name.
+
+But sometimes there are many backreferences. And names may be used both in circular references and normal properties.
+
+Write replacer function to stringify everything, but remove properties that reference meetup:
+
+let room = {
+  number: 23
+};
+
+let meetup = {
+  title: "Conference",
+  occupiedBy: [{name: "John"}, {name: "Alice"}],
+  place: room
+};
+
+// circular references
+room.occupiedBy = meetup;
+meetup.self = meetup;
+
+/* result should be:
+{
+  "title":"Conference",
+  "occupiedBy":[{"name":"John"},{"name":"Alice"}],
+  "place":{"number":23}
+}
+*/
+
+Hint: alert( JSON.stringify(meetup, function replacer(key, value) {
+  /* your code */
+}));
+
+
+
+43. 
+	1.	Create an array styles with items “Jazz” and “Blues”.
+	2.	Append “Rock-n-Roll” to the end.
+	3.	Replace the value in the middle by “Classics”. Your code for finding the middle value should work for any arrays with odd length.
+	4.	Strip off the first value of the array and show it.
+	5.	Prepend Rap and Reggae to the array.
+
+	The array in the process:
+
+Jazz, Blues
+Jazz, Bues, Rock-n-Roll
+Jazz, Classics, Rock-n-Roll
+Classics, Rock-n-Roll
+Rap, Reggae, Classics, Rock-n-Roll
+
+
+
+44. Write the function sumInput() that:
+
+Asks the user for values using prompt and stores the values in the array.
+Finishes asking when the user enters a non-numeric value, an empty string, or presses “Cancel”.
+Calculates and returns the sum of array items.
+P.S. A zero 0 is a valid number, please don’t stop the input on zero.
+
+
+
+45. The input is an array of numbers, e.g. arr = [1, -2, 3, 4, -9, 6].
+
+The task is: find the contiguous subarray of arr with the maximal sum of items.
+
+Write the function getMaxSubSum(arr) that will return that sum.
+
+For instance:
+
+getMaxSubSum([-1, 2, 3, -9]) = 5 (the sum of highlighted items)
+getMaxSubSum([2, -1, 2, 3, -9]) = 6
+getMaxSubSum([-1, 2, 3, -9, 11]) = 11
+getMaxSubSum([-2, -1, 1, 2]) = 3
+getMaxSubSum([100, -9, 2, -3, 5]) = 100
+getMaxSubSum([1, 2, 3]) = 6 (take all)
+If all items are negative, it means that we take none (the subarray is empty), so the sum is zero:
+
+getMaxSubSum([-1, -2, -3]) = 0
+Please try to think of a fast solution: O(n2) or even O(n) if you can.
+
+
+
+46. There is a salaries object with arbitrary number of salaries.
+
+Write the function sumSalaries(salaries) that returns the sum of all salaries using Object.values and the for..of loop.
+
+If salaries is empty, then the result must be 0.
+
+For instance:
+
+let salaries = {
+  "John": 100,
+  "Pete": 300,
+  "Mary": 250
+};
+
+alert( sumSalaries(salaries) ); // 650
+
+
+
+47. Write a function count(obj) that returns the number of properties in the object:
+
+let user = {
+  name: 'John',
+  age: 30
+};
+
+alert( count(user) ); // 2
+Try to make the code as short as possible.
+
+P.S. Ignore symbolic properties, count only “regular” ones.
+
+
+
+48. Implement the function, pow(number, power), that raises a "number" to "power".
+
+	1. Iterative approach
+	2. Recursive approach
+	
+E.g.:
+
+pow(2, 2) = 4
+pow(2, 3) = 8
+pow(2, 4) = 16
+
+
+
+
+49. let company = {
+  sales: [{
+    name: 'John',
+    salary: 1000
+  }, {
+    name: 'Alice',
+    salary: 600
+  }],
+
+  development: {
+    sites: [{
+      name: 'Peter',
+      salary: 2000
+    }, {
+      name: 'Alex',
+      salary: 1800
+    }],
+
+    internals: [{
+      name: 'Jack',
+      salary: 1300
+    }]
+  }
+};
+
+
+Write code to calculate the sum of the salaries from the above object. The approach should be generic in nature. Any other object provided as an input should be processed and an appropriate result should be returned.
+
+
+
+50. Implement a linked list in Core Javascript.
+
+Let’s say we have a single-linked list (as described in the chapter Recursion and stack):
+
+let list = {
+  value: 1,
+  next: {
+    value: 2,
+    next: {
+      value: 3,
+      next: {
+        value: 4,
+        next: null
+      }
+    }
+  }
+};
+Write a function printList(list) that outputs list items one-by-one.
+
+Make two variants of the solution: using a loop and using recursion.
+
+What’s better: with recursion or without it?
+
+
+
+51. Output a single-linked list from the previous task Output a single-linked list in the reverse order.
+
+Make two solutions: using a loop and using a recursion.
+
+
+
+52. Write a function sumTo(n) that calculates the sum of numbers 1 + 2 + ... + n.
+
+For instance:
+
+sumTo(1) = 1
+sumTo(2) = 2 + 1 = 3
+sumTo(3) = 3 + 2 + 1 = 6
+sumTo(4) = 4 + 3 + 2 + 1 = 10
+...
+sumTo(100) = 100 + 99 + ... + 2 + 1 = 5050
+Make 3 solution variants:
+
+Using a for loop.
+Using a recursion, cause sumTo(n) = n + sumTo(n-1) for n > 1.
+Using the arithmetic progression formula.
+
+An example of the result:
+
+function sumTo(n) { /*... your code ... */ }
+
+alert( sumTo(100) ); // 5050
+P.S. Which solution variant is the fastest? The slowest? Why?
+
+P.P.S. Can we use recursion to count sumTo(100000)?
+
+
+
+
+53. he factorial of a natural number is a number multiplied by "number minus one", then by "number minus two", and so on till 1. The factorial of n is denoted as n!
+
+We can write a definition of factorial like this:
+
+n! = n * (n - 1) * (n - 2) * ...*1
+Values of factorials for different n:
+
+1! = 1
+2! = 2 * 1 = 2
+3! = 3 * 2 * 1 = 6
+4! = 4 * 3 * 2 * 1 = 24
+5! = 5 * 4 * 3 * 2 * 1 = 120
+The task is to write a function factorial(n) that calculates n! using recursive calls.
+
+alert( factorial(5) ); // 120
+
+
+
+
+54. The sequence of Fibonacci numbers has the formula Fn = Fn-1 + Fn-2. In other words, the next number is a sum of the two preceding ones.
+
+First two numbers are 1, then 2(1+1), then 3(1+2), 5(2+3) and so on: 1, 1, 2, 3, 5, 8, 13, 21....
+
+Fibonacci numbers are related to the Golden ratio and many natural phenomena around us.
+
+Write a function fib(n) that returns the n-th Fibonacci number.
+
+An example of work:
+
+function fib(n) { /* your code */ }
+
+alert(fib(3)); // 2
+alert(fib(7)); // 13
+alert(fib(77)); // 5527939700884757
+P.S. The function should be fast. The call to fib(77) should take no more than a fraction of a second.
+
+
+
+
+55. Create a decorator spy(func) that should return a wrapper that saves all calls to function in its calls property.
+
+Every call is saved as an array of arguments.
+
+For instance:
+
+function work(a, b) {
+  alert( a + b ); // work is an arbitrary function or method
+}
+
+work = spy(work);
+
+work(1, 2); // 3
+work(4, 5); // 9
+
+for (let args of work.calls) {
+  alert( 'call:' + args.join() ); // "call:1,2", "call:4,5"
+}
+
+
+
+
+56. Create a decorator delay(f, ms) that delays each call of f by ms milliseconds.
+
+For instance:
+
+function f(x) {
+  alert(x);
+}
+
+// create wrappers
+let f1000 = delay(f, 1000);
+let f1500 = delay(f, 1500);
+
+f1000("test"); // shows "test" after 1000ms
+f1500("test"); // shows "test" after 1500ms
+In other words, delay(f, ms) returns a "delayed by ms" variant of f.
+
+In the code above, f is a function of a single argument, but your solution should pass all arguments and the context this.
+
+
+
+
+57. The result of debounce(f, ms) decorator should be a wrapper that passes the call to f at maximum once per ms milliseconds.
+
+In other words, when we call a “debounced” function, it guarantees that all other future in the closest ms milliseconds will be ignored.
+
+For instance:
+
+let f = debounce(alert, 1000);
+
+f(1); // runs immediately
+f(2); // ignored
+
+setTimeout( () => f(3), 100); // ignored ( only 100 ms passed )
+setTimeout( () => f(4), 1100); // runs
+setTimeout( () => f(5), 1500); // ignored (less than 1000 ms from the last run)
+In practice debounce is useful for functions that retrieve/update something when we know that nothing new can be done in such a short period of time, so it’s better not to waste resources.
+
+
+
+58. Create a “throttling” decorator throttle(f, ms) – that returns a wrapper, passing the call to f at maximum once per ms milliseconds. Those calls that fall into the “cooldown” period, are ignored.
+
+The difference with debounce – if an ignored call is the last during the cooldown, then it executes at the end of the delay.
+
+Let’s check the real-life application to better understand that requirement and to see where it comes from.
+
+For instance, we want to track mouse movements.
+
+In browser we can setup a function to run at every mouse micro-movement and get the pointer location as it moves. During an active mouse usage, this function usually runs very frequently, can be something like 100 times per second (every 10 ms).
+
+The tracking function should update some information on the web-page.
+
+Updating function update() is too heavy to do it on every micro-movement. There is also no sense in making it more often than once per 100ms.
+
+So we’ll assign throttle(update, 100) as the function to run on each mouse move instead of the original update(). The decorator will be called often, but update() will be called at maximum once per 100ms.
+
+Visually, it will look like this:
+
+1. For the first mouse movement the decorated variant passes the call to update. That’s important, the user sees our reaction to their move immediately.
+2. Then as the mouse moves on, until 100ms nothing happens. The decorated variant ignores calls.
+3. At the end of 100ms – one more update happens with the last coordinates.
+4. Then, finally, the mouse stops somewhere. The decorated variant waits until 100ms expire and then runs update runs with last coordinates. So, perhaps the most important, the final mouse coordinates are processed.
+
+A code example:
+
+function f(a) {
+  console.log(a)
+};
+
+// f1000 passes calls to f at maximum once per 1000 ms
+let f1000 = throttle(f, 1000);
+
+f1000(1); // shows 1
+f1000(2); // (throttling, 1000ms not out yet)
+f1000(3); // (throttling, 1000ms not out yet)
+
+// when 1000 ms time out...
+// ...outputs 3, intermediate value 2 was ignored
+P.S. Arguments and the context this passed to f1000 should be passed to the original f.
+
+
+
+
+59. Find all the ways in which one can merge the following arrays:
+
+let arr1 = [4,22,54,-52, 36,105];
+let arr2 = [84,45,65,98,52,14,70];
+let arr3 = [55,65,32,65,98,45,52,25];
+
+
+
+60. 
+
+function makeCounter() {
+      let count = 0;
+    
+      // ... your code ...
+    }
+    
+    let counter = makeCounter();
+    
+    alert( counter() ); // 0
+    alert( counter() ); // 1
+    
+    counter.set(10); // set the new count
+    
+    alert( counter() ); // 10
+    
+    counter.decrease(); // decrease the count by 1
+    
+    alert( counter() ); // 10 (instead of 11)
+
+
+Modify the code of makeCounter() so that the counter can also decrease and set the number:
+
+counter() should return the next number (as before).
+counter.set(value) should set the count to value.
+counter.decrease() should decrease the count by 1.
+See the sandbox code for the complete usage example.
+
+
+
+61. Write function sum that would work like this:
+
+sum(1)(2) == 3; // 1 + 2
+sum(1)(2)(3) == 6; // 1 + 2 + 3
+sum(5)(-1)(2) == 6
+sum(6)(-1)(-2)(-3) == 0
+sum(0)(1)(2)(3)(4)(5) == 15
+
+
+
+62. Use closures to create a function to implement a counter.
+
+let counter = makeCounter();
+let counter2 = makeCounter();
+
+alert( counter() );
+alert( counter() );
+
+alert( counter2() );
+alert( counter2() );
+
+Above mentioned variables counter and counter2 should be independent variables.
+
+
+
+
+63. Write function sum that works like this: sum(a)(b) = a+b.
+Yes, exactly this way, via double brackets (not a mistype).
+For instance:
+
+sum(1)(2) = 3
+sum(5)(-1) = 4
+
+
+
+64. We have a built-in method arr.filter(f) for arrays. It filters all elements through the function f. If it returns true, then that element is returned in the resulting array.
+
+Make a set of “ready to use” filters:
+
+inBetween(a, b) – between a and b or equal to them (inclusively).
+inArray([...]) – in the given array.
+The usage must be like this:
+
+arr.filter(inBetween(3,6)) – selects only values between 3 and 6.
+arr.filter(inArray([1,2,3])) – selects only elements matching with one of the members of [1,2,3].
+For instance:
+
+/* .. your code for inBetween and inArray */
+let arr = [1, 2, 3, 4, 5, 6, 7];
+
+alert( arr.filter(inBetween(3, 6)) ); // 3,4,5,6
+
+alert( arr.filter(inArray([1, 2, 10])) ); // 1,2
+
+
+
+65. We’ve got an array of objects to sort:
+
+let users = [
+  { name: "John", age: 20, surname: "Johnson" },
+  { name: "Pete", age: 18, surname: "Peterson" },
+  { name: "Ann", age: 19, surname: "Hathaway" }
+];
+The usual way to do that would be:
+
+// by name (Ann, John, Pete)
+users.sort((a, b) => a.name > b.name ? 1 : -1);
+
+// by age (Pete, Ann, John)
+users.sort((a, b) => a.age > b.age ? 1 : -1);
+Can we make it even less verbose, like this?
+
+users.sort(byField('name'));
+users.sort(byField('age'));
+So, instead of writing a function, just put byField(fieldName).
+
+Write the function byField that can be used for that.
+
+
+
+
+66. The following code creates an array of shooters.
+
+Every function is meant to output its number. But something is wrong…
+
+ function makeArmy() {
+  let shooters = [];
+
+  let i = 0;
+  while (i < 10) {
+    let shooter = function() { // shooter function
+      alert( i ); // should show its number
+    };
+    shooters.push(shooter);
+    i++;
+  }
+
+  return shooters;
+}
+
+let army = makeArmy();
+
+army[0](); // the shooter number 0 shows 10
+army[5](); // and number 5 also outputs 10...
+// ... all shooters show 10 instead of their 0, 1, 2, 3...
+Why all shooters show the same? Fix the code so that they work as intended.
+
+
+
+67. Write a function printNumbers(from, to) that outputs a number every second, starting from from and ending with to.
+
+Make two variants of the solution.
+
+1. Using setInterval.
+2. Using recursive setTimeout.
+
+
+
+68. Here’s the function that uses nested setTimeout to split a job into pieces.
+
+Rewrite it to setInterval:
+
+ let i = 0;
+
+let start = Date.now();
+
+function count() {
+
+  if (i == 1000000000) {
+    alert("Done in " + (Date.now() - start) + 'ms');
+  } else {
+    setTimeout(count, 0);
+  }
+
+  // a piece of heavy job
+  for(let j = 0; j < 1000000; j++) {
+    i++;
+  }
+
+}
+
+count();
+
+69. The call to askPassword() in the code below should check the password and then call user.loginOk/loginFail depending on the answer.
+
+But it leads to an error. Why?
+
+Fix the (**) line for everything to start working right (other lines are not to be changed).
+
+function askPassword(ok, fail) {
+  let password = prompt("Password?", '');
+  if (password == "rockstar") ok();
+  else fail();
+}
+
+let user = {
+  name: 'John',
+
+  loginOk() {
+    alert(`${this.name} logged in`);
+  },
+
+  loginFail() {
+    alert(`${this.name} failed to log in`);
+  },
+
+};
+
+askPassword(user.loginOk, user.loginFail);   //(**)
+
+
+
+
+
+70. The task is a little more complex variant of Ask losing this.
+
+The user object was modified. Now instead of two functions loginOk/loginFail, it has a single function user.login(true/false).
+
+What to pass askPassword in the code below, so that it calls user.login(true) as ok and user.login(false) as fail?
+
+function askPassword(ok, fail) {
+  let password = prompt("Password?", '');
+  if (password == "rockstar") ok();
+  else fail();
+}
+
+let user = {
+  name: 'John',
+
+  login(result) {
+    alert( this.name + (result ? ' logged in' : ' failed to log in') );
+  }
+};
+
+askPassword(?, ?); // (**)
+Your changes should only modify the fragment marked with (**).
+
+
+
+71. Here’s the code with Rabbit extending Animal.
+
+Unfortunately, Rabbit objects can’t be created. What’s wrong? Fix it.
+
+class Animal {
+
+  constructor(name) {
+    this.name = name;
+  }
+
+}
+
+class Rabbit extends Animal {
+  constructor(name) {
+    this.name = name;
+    this.created = Date.now();
+  }
+}
+
+let rabbit = new Rabbit("White Rabbit");
+alert(rabbit.name);
+  
+72. We’ve got a Clock class. As of now, it prints the time every second.
+
+Create a new class ExtendedClock that inherits from Clock and adds the parameter precision – the number of ms between “ticks”. Should be 1000 (1 second) by default.
+
+Your code should be in the file extended-clock.js
+Don’t modify the original clock.js. Extend it.
+
+73. Here’s the code that creates a pair of objects, then modifies them.
+
+Which values are shown in the process?
+
+let animal = {
+  jumps: null
+};
+let rabbit = {
+  __proto__: animal,
+  jumps: true
+};
+
+alert( rabbit.jumps ); // ? (1)
+
+delete rabbit.jumps;
+
+alert( rabbit.jumps ); // ? (2)
+
+delete animal.jumps;
+
+alert( rabbit.jumps ); // ? (3)
+There should be 3 answers.
+
+
+
+74. The task has two parts.
+
+We have an object:
+
+let head = {
+  glasses: 1
+};
+
+let table = {
+  pen: 3
+};
+
+let bed = {
+  sheet: 1,
+  pillow: 2
+};
+
+let pockets = {
+  money: 2000
+};
+
+	1. Use __proto__ to assign prototypes in a way that any property lookup will follow the path: pockets → bed → table → head. For instance, pockets.pen should be 3 (found in table), and bed.glasses should be 1 (found in head).
+	2. Answer the question: is it faster to get glasses as pockets.glasses or head.glasses? Benchmark if needed.
+
+75. We have rabbit inheriting from animal.
+
+If we call rabbit.eat(), which object receives the full property: animal or rabbit?
+
+let animal = {
+  eat() {
+    this.full = true;
+  }
+};
+
+let rabbit = {
+  __proto__: animal
+};
+
+rabbit.eat();
+
+
+
+
+76. We have two hamsters: speedy and lazy inheriting from the general hamster object.
+
+When we feed one of them, the other one is also full. Why? How to fix it?
+
+ let hamster = {
+  stomach: [],
+
+  eat(food) {
+    this.stomach.push(food);
+  }
+};
+
+let speedy = {
+  __proto__: hamster
+};
+
+let lazy = {
+  __proto__: hamster
+};
+
+// This one found the food
+speedy.eat("apple");
+alert( speedy.stomach ); // apple
+
+// This one also has it, why? fix please.
+alert( lazy.stomach ); // apple
+
+
+
+
+77. Find an error in the prototypal inheritance below.
+
+What’s wrong? What are consequences going to be?
+
+function Animal(name) {
+  this.name = name;
+}
+
+Animal.prototype.walk = function() {
+  alert(this.name + ' walks');
+};
+
+function Rabbit(name) {
+  this.name = name;
+}
+
+Rabbit.prototype = Animal.prototype;
+
+Rabbit.prototype.walk = function() {
+  alert(this.name + " bounces!");
+};
+
+
+
+78. The Clock class is written in functional style. Rewrite it using prototypes.
+
+function Clock({ template }) {
+
+  let timer;
+
+  function render() {
+    let date = new Date();
+
+    let hours = date.getHours();
+    if (hours < 10) hours = '0' + hours;
+
+    let mins = date.getMinutes();
+    if (mins < 10) mins = '0' + mins;
+
+    let secs = date.getSeconds();
+    if (secs < 10) secs = '0' + secs;
+
+    let output = template
+      .replace('h', hours)
+      .replace('m', mins)
+      .replace('s', secs);
+
+    console.log(output);
+  }
+
+  this.stop = function() {
+    clearInterval(timer);
+  };
+
+  this.start = function() {
+    render();
+    timer = setInterval(render, 1000);
+  };
+
+}
+let clock = new Clock({template: 'h:m:s'});
+    clock.start();
+
+
+79. In the code below we create new Rabbit, and then try to modify its prototype.
+
+In the start, we have this code:
+
+ function Rabbit() {}
+Rabbit.prototype = {
+  eats: true
+};
+
+let rabbit = new Rabbit();
+
+alert( rabbit.eats ); // true
+
+
+	A) We added one more string (emphasized => (**)), what alert shows now?
+
+		function Rabbit() {}
+		Rabbit.prototype = {
+		  eats: true
+		};
+
+		let rabbit = new Rabbit();
+
+		Rabbit.prototype = {}; //(**)
+
+		alert( rabbit.eats ); // ?
+
+		
+	B) …And if the code is like this (replaced one line)?
+
+		function Rabbit() {}
+		Rabbit.prototype = {
+		  eats: true
+		};
+
+		let rabbit = new Rabbit();
+
+		Rabbit.prototype.eats = false;
+
+		alert( rabbit.eats ); // ?
+	
+	C) Like this (replaced one line)?
+
+		function Rabbit() {}
+		Rabbit.prototype = {
+		  eats: true
+		};
+
+		let rabbit = new Rabbit();
+
+		delete rabbit.eats;
+
+		alert( rabbit.eats ); // ?
+		
+	D) The last variant:
+
+		function Rabbit() {}
+		Rabbit.prototype = {
+		  eats: true
+		};
+
+		let rabbit = new Rabbit();
+
+		delete Rabbit.prototype.eats;
+
+		alert( rabbit.eats ); // ?
+
+
+
+		
+80. Imagine, we have an arbitrary object obj, created by a constructor function – we don’t know which one, but we’d like to create a new object using it.
+
+Can we do it like that?
+
+let obj2 = new obj.constructor();
+Give an example of a constructor function for obj which lets such code work right. And an example that makes it work wrong.
+
+81. Rewrite the Clock class to the modern “class” syntax.
+
+
+function Clock({ template }) {
+  this._template = template;
+}
+
+Clock.prototype._render = function() {
+  let date = new Date();
+
+  let hours = date.getHours();
+  if (hours < 10) hours = '0' + hours;
+
+  let mins = date.getMinutes();
+  if (mins < 10) mins = '0' + mins;
+
+  let secs = date.getSeconds();
+  if (secs < 10) secs = '0' + secs;
+
+  let output = this._template
+    .replace('h', hours)
+    .replace('m', mins)
+    .replace('s', secs);
+
+  console.log(output);
+};
+
+Clock.prototype.stop = function() {
+  clearInterval(this._timer);
+};
+
+Clock.prototype.start = function() {
+  this._render();
+  this._timer = setInterval(() => this._render(), 1000);
+};
+
+let clock = new Clock({template: 'h:m:s'});
+clock.start();
+
+
+
+
+82. There’s a tree structured as nested ul/li.
+
+Write the code that for each <li> shows:
+
+1. What’s the text inside it (without the subtree)
+2. The number of nested <li> – all descendants, including the deeply nested ones.
+
+
+
+83. What does the script show?
+
+<html>
+
+<body>
+  <script>
+    alert(document.body.lastChild.nodeType);
+  </script>
+</body>
+
+</html>
+
+
+
+84. Here’s the document with the table and form.
+
+How to find?
+
+The table with id="age-table".
+All label elements inside that table (there should be 3 of them).
+The first td in that table (with the word “Age”).
+The form with the name search.
+The first input in that form.
+The last input in that form.
+
+
+
+HTML file:
+
+
+<!DOCTYPE HTML>
+<html>
+<body>
+  <form name="search">
+    <label>Search the site:
+      <input type="text" name="search">
+    </label>
+    <input type="submit" value="Search!">
+  </form>
+
+  <hr>
+
+  <form name="search-person">
+    Search the visitors:
+    <table id="age-table">
+      <tr>
+        <td>Age:</td>
+        <td id="age-list">
+          <label>
+            <input type="radio" name="age" value="young">less than 18</label>
+          <label>
+            <input type="radio" name="age" value="mature">18-50</label>
+          <label>
+            <input type="radio" name="age" value="senior">more than 50</label>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Additionally:</td>
+        <td>
+          <input type="text" name="info[0]">
+          <input type="text" name="info[1]">
+          <input type="text" name="info[2]">
+        </td>
+      </tr>
+
+    </table>
+
+    <input type="submit" value="Search!">
+  </form>
+</body>
+</html>
+
+
+
+
+85. 
+	A) Add JavaScript to the button to make <div id="text"> disappear when we click it.
+	B) Create a button that hides itself on click.	
+
+
+
+86. Move the ball across the field to a click. Like this:
+		https://en.js.cx/task/move-ball-field/solution/
+
+
+
+
+87. Create a menu that opens/collapses on click:
+	▼ Sweeties (click me)!
+		Cake
+		Donut
+		Honey
+	
+P.S. HTML/CSS of the source document is to be modified.
+
+
+
+
+
+88. Create a “carousel” – a ribbon of images that can be scrolled by clicking on arrows.
+	https://en.js.cx/task/carousel/solution/
+	
+	Later we can add more features to it: infinite scrolling, dynamic loading etc.
+	P.S. For this task HTML/CSS structure is actually 90% of the solution.
+
+	
+
+	
+89. Create a function clear(elem) that removes everything from the element.
+
+ <ol id="elem">
+  <li>Hello</li>
+  <li>World</li>
+</ol>
+
+<script>
+  function clear(elem) { /* your code */ }
+
+  clear(elem); // clears the list
+</script>
+
+
+
+
+90. Write an interface to create a list from user input.
+
+For every list item:
+
+1. Ask a user about its content using prompt.
+2. Create the <li> with it and add it to <ul>.
+3. Continue until the user cancels the input (by pressing Esc or CANCEL in prompt).
+
+All elements should be created dynamically.
+If a user types HTML-tags, they should be treated like a text.
+
+
+
+91. Write a function createTree that creates a nested ul/li list from the nested object.
+
+For instance:
+
+let data = {
+  "Fish": {
+    "trout": {},
+    "salmon": {}
+  },
+
+  "Tree": {
+    "Huge": {
+      "sequoia": {},
+      "oak": {}
+    },
+    "Flowering": {
+      "redbud": {},
+      "magnolia": {}
+    }
+  }
+};
+The syntax:
+
+
+
+let container = document.getElementById('container');
+createTree(container, data); // creates the tree in the container
+
+Choose one of two ways of solving this task:
+
+1. Create the HTML for the tree and then assign to container.innerHTML.
+2. Create tree nodes and append with DOM methods.
+
+Would be great if you could do both.
+
+P.S. The tree should not have “extra” elements like empty <ul></ul> for the leaves.
+
+
+
+
+
+92. There’s a tree organized as nested ul/li.
+
+Write the code that adds to each <li> the number of its descendants. Skip leaves (nodes without children).
+
+The result:
+
+<ul>
+    <li>Animals
+       [9]<ul>
+        <li>Mammals
+           [4]<ul>
+            <li>Cows</li>
+            <li>Donkeys</li>
+            <li>Dogs</li>
+            <li>Tigers</li>
+          </ul>
+        </li>
+        <li>Other
+           [3]<ul>
+            <li>Snakes</li>
+            <li>Birds</li>
+            <li>Lizards</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Fishes
+       [5]<ul>
+        <li>Aquarium
+           [2]<ul>
+            <li>Guppy</li>
+            <li>Angelfish</li>
+          </ul>
+        </li>
+        <li>Sea
+           [1]<ul>
+            <li>Sea trout</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+
+
+
+93. Write a function createCalendar(elem, year, month).
+The call should create a calendar for the given year/month and put it inside elem.
+The calendar should be a table, where a week is <tr>, and a day is <td>. The table top should be <th> with weekday names: the first day should be Monday, and so on till Sunday.
+
+P.S. For this task it’s enough to generate the calendar, should not yet be clickable.
+
+
+
+
+94. Create a colored clock like here:
+Use HTML/CSS for the styling, Javascript only updates time in elements.
+HH(red color):MM(green color):SS(blue color)
+
+
+
+
+95. Write the code to insert <li>2</li><li>3</li> between two <li> here:
+
+<ul id="ul">
+  <li id="one">1</li>
+  <li id="two">4</li>
+</ul>
+
+
+
+96. There’s a table:
+
+Name	Surname	Age
+John	Smith	10
+Pete	Brown	15
+Ann		Lee		5
+...	...	...
+There may be more rows in it.
+
+Write the code to sort it by the "name" column.
+
+97. Write a function showNotification(options) that creates a notification: <div class="notification"> with the given content. The notification should automatically disappear after 1.5 seconds.
+
+The options are:
+
+// shows an element with the text "Hello" near the right-top of the window
+showNotification({
+  top: 10, // 10px from the top of the window (by default 0px)
+  right: 10, // 10px from the right edge of the window (by default 0px)
+  html: "Hello!", // the HTML of notification
+  className: "welcome" // an additional class for the div (optional)
+});
+
+Use CSS positioning to show the element at given top/right coordinates. The source document has the necessary styles.
+
+
+
+98. Make the table sortable: clicks on <th> elements should sort it by corresponding column.
+
+Each <th> has the type in the attribute, like this:
+
+<table id="grid">
+  <thead>
+    <tr>
+      <th data-type="number">Age</th>
+      <th data-type="string">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5</td>
+      <td>John</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Ann</td>
+    </tr>
+    ...
+  </tbody>
+</table>
+In the example above the first column has numbers, and the second one – strings. The sorting function should handle sort according to the type.
+
+Only "string" and "number" types should be supported.
+
+
+
+
+99. Create JS-code for the tooltip behavior.
+
+When a mouse comes over an element with data-tooltip, the tooltip should appear over it, and when it’s gone then hide.
+
+An example of annotated HTML:
+
+<button data-tooltip="the tooltip is longer than the element">Short button</button>
+<button data-tooltip="HTML<br>tooltip">One more button</button>
+
+
+In this task we assume that all elements with data-tooltip have only text inside. No nested tags.
+
+Details:
+
+1. The tooltip should not cross window edges. Normally it should be above the element, but if the element is at the page top and there’s no space for the tooltip, then below it.
+2. The tooltip is given in the data-tooltip attribute. It can be arbitrary HTML.
+
+You’ll need two events here:
+
+1. mouseover triggers when a pointer comes over an element.
+mouseout triggers when a pointer leaves an element.
+2. Please use event delegation: set up two handlers on document to track all “overs” and “outs” from elements with data-tooltip and manage tooltips from there.
+
+After the behavior is implemented, even people unfamiliar with JavaScript can add annotated elements.
+
+P.S. To keep things natural and simple: only one tooltip may show up at a time.
+
+
+
+100. Demonstrate the behavior of Event bubling and capturing. Use following nesting for demonstration.
+
+HTML -> BODY -> FORM -> DIV -> P
+
+
+
+101. Why in the code below return false doesn’t work at all?
+
+ <script>
+  function handler() {
+    alert( "..." );
+    return false;
+  }
+</script>
+
+<a href="http://w3.org" onclick="handler()">the browser will go to w3.org</a>
+
+The browser follows the URL on click, but we don’t want it.
+How to fix?
+
+
+
+102. Make all links inside the element with id="contents" ask the user if they really want to leave. And if they don’t then don’t follow.
+
+<fieldset id="contents">
+    <legend>#contents</legend>
+    <p>
+      How about to read <a href="http://wikipedia.org">Wikipedia</a> or visit <a href="http://w3.org"><i>W3.org</i></a> and learn about modern standards?
+    </p>
+</fieldset>
+
+Details:
+
+1. HTML inside the element may be loaded or regenerated dynamically at any time, so we can’t find all links and put handlers on them. Use the event delegation.
+2. The content may have nested tags. Inside links too, like <a href=".."><i>...</i></a>.  
+
+
+
+103. Create an image gallery where the main image changes by the click on a thumbnail.
+
+https://en.js.cx/task/image-gallery/solution/
+
+
+104. Create a function runOnKeys(func, code1, code2, ... code_n) that runs func on simultaneous pressing of keys with codes code1, code2, …, code_n.
+
+For instance, the code below shows alert when "Q" and "W" are pressed together (in any language, with or without CapsLock)
+
+runOnKeys(
+  () => alert("Hello!"),
+  "KeyQ",
+  "KeyW"
+);
+
+
+
+
+105. Normally, images are loaded when they are created. So when we add <img> to the page, the user does not see the picture immediately. The browser needs to load it first.
+
+To show an image immediately, we can create it “in advance”, like this:
+
+let img = document.createElement('img');
+img.src = 'my.jpg';
+The browser starts loading the image and remembers it in the cache. Later, when the same image appears in the document (no matter how), it shows up immediately.
+
+Create a function preloadImages(sources, callback) that loads all images from the array sources and, when ready, runs callback.
+
+For instance, this will show an alert after the images are loaded:
+
+function loaded() {
+  alert("Images loaded")
+}
+
+preloadImages(["1.jpg", "2.jpg", "3.jpg"], loaded);
+In case of an error, the function should still assume the picture “loaded”.
+
+In other words, the callback is executed when all images are either loaded or errored out.
+
+The function is useful, for instance, when we plan to show a gallery with many scrollable images, and want to be sure that all images are loaded.
+
+In the source document you can find links to test images, and also the code to check whether they are loaded or not. It should output 300.
+
+
+
+
+
+
+106. Write JavaScript that shows a tooltip over an element with the attribute data-tooltip.
+
+That’s like the task Tooltip behavior, but here the annotated elements can be nested. The most deeply nested tooltip is shown.
+
+For instance:
+
+<div data-tooltip="Here – is the house interior" id="house">
+  <div data-tooltip="Here – is the roof" id="roof"></div>
+  ...
+  <a href="https://en.wikipedia.org/wiki/The_Three_Little_Pigs" data-tooltip="Read on…">Hover over me</a>
+</div>
+
+
+
+
+107. Write a function that shows a tooltip over an element only if the visitor moves the mouse over it, but not through it.
+
+In other words, if the visitor moves the mouse on the element and stopped – show the tooltip. And if they just moved the mouse through fast, then no need, who wants extra blinking?
+
+Technically, we can measure the mouse speed over the element, and if it’s slow then we assume that it comes “over the element” and show the tooltip, if it’s fast – then we ignore it.
+
+Make a universal object new HoverIntent(options) for it. With options:
+
+elem – element to track.
+over – a function to call if the mouse is slowly moving the element.
+out – a function to call when the mouse leaves the element (if over was called).
+An example of using such object for the tooltip:
+
+// a sample tooltip
+let tooltip = document.createElement('div');
+tooltip.className = "tooltip";
+tooltip.innerHTML = "Tooltip";
+
+// the object will track mouse and call over/out
+new HoverIntent({
+  elem,
+  over() {
+    tooltip.style.left = elem.getBoundingClientRect().left + 'px';
+    tooltip.style.top = elem.getBoundingClientRect().bottom + 5 + 'px';
+    document.body.append(tooltip);
+  },
+  out() {
+    tooltip.remove();
+  }
+});
+
+
+
+
+108. Create a slider:
+
+Drag the blue thumb with the mouse and move it.
+
+Important details:
+
+1. When the mouse button is pressed, during the dragging the mouse may go over or below the slider. The slider will still work (convenient for the user).
+2. If the mouse moves very fast to the left or to the right, the thumb should stop exactly at the edge.
+
+
+
+
+
+109. There’s a <select>:
+
+<select id="genres">
+  <option value="rock">Rock</option>
+  <option value="blues" selected>Blues</option>
+</select>
+Use JavaScript to:
+
+Show the value and the text of the selected option.
+Add an option: <option value="classic">Classic</option>.
+Make it selected.
+
+
+
+110. Create a <div> that turns into <textarea> when clicked.
+
+The textarea allows to edit the HTML in the <div>.
+
+When the user presses Enter or it looses focus, the <textarea> turns back into <div>, and its content becomes HTML in <div>.
+
+
+
+111. Make table cells editable on click.
+
+1. On click – the cell should became “editable” (textarea appears inside), we can change HTML. There should be no resize, all geometry should remain the same.
+2. Buttons OK and CANCEL appear below the cell to finish/cancel the editing.
+3. Only one cell may be editable at a moment. While a <td> is in “edit mode”, clicks on other cells are ignored.
+4. The table may have many cells. Use event delegation.
+
+
+
+112. Create an interface that allows to enter a sum of bank deposit and percentage, then calculates how much it will be after given periods of time.
+Any input change should be processed immediately.
+
+The formula is:
+
+// initial: the initial money sum
+// interest: e.g. 0.05 means 5% per year
+// years: how many years to wait
+let result = Math.round(initial * (1 + interest * years));
+
+
+
+113. Create a function showPrompt(html, callback) that shows a form with the message html, an input field and buttons OK/CANCEL.
+
+1. A user should type something into a text field and press Enter or the OK button, then callback(value) is called with the value they entered.
+2. Otherwise if the user presses Esc or CANCEL, then callback(null) is called.
+
+In both cases that ends the input process and removes the form.
+
+Requirements:
+
+1. The form should be in the center of the window.
+2. The form is modal. In other words, no interaction with the rest of the page is possible until the user closes it.
+3. When the form is shown, the focus should be inside the <input> for the user.
+4. Keys Tab/Shift+Tab should shift the focus between form fields, don’t allow it to leave for other page elements.
+
+Usage example:
+
+showPrompt("Enter something<br>...smart :)", function(value) {
+  alert(value);
+});
+
+
+
+
+114. Take an image by resolution 500 px X 500 px. Put the image in an <img> tag with height and width as 50px X 50px. On clicking the image,
+
+The image grows on click from 50x50px to 500x500px (10 times larger).
+The animation takes 3 seconds.
+At the end output: “Done!”.
+During the animation process, there may be more clicks on the plane. They shouldn’t “break” anything.
+Hint: Use CSS animations
+
+
+
+115. Modify the solution of the previous task Animate a plane (CSS) to make the plane grow more than it’s original size 500 X 500px (jump out), and then return to that size.
+Hint: Use CSS animations
+
+
+
+116. Create a function showCircle(cx, cy, radius) that shows an animated growing circle.
+
+1. cx,cy are window-relative coordinates of the center of the circle,
+2. radius is the radius of the circle.
+Hint: Use CSS animations
+
+
+
+117. Make a bouncing ball. It should look like the following link:
+https://en.js.cx/task/animate-ball/solution/
+
+
+
+118. Using the above code, Make the ball bounce to the right. Write the animation code. The distance to the left is 100px.
+
+
+119. There are many programming languages, for instance Java, JavaScript, PHP, C, C++.
+
+Create a regexp that finds them in the string Java JavaScript PHP C++ C:
+
+let reg = /your regexp/g;
+
+alert("Java JavaScript PHP C++ C".match(reg)); // Java JavaScript PHP C++ C
+
+
+
+
+120. A “bb-tag” looks like [tag]...[/tag], where tag is one of: b, url or quote.
+
+For instance:
+
+[b]text[/b]
+[url]http://google.com[/url]
+BB-tags can be nested. But a tag can’t be nested into itself, for instance:
+
+Normal:
+[url] [b]http://google.com[/b] [/url]
+[quote] [b]text[/b] [/quote]
+
+Impossible:
+[b][b]text[/b][/b]
+Tags can contain line breaks, that’s normal:
+
+[quote]
+  [b]text[/b]
+[/quote]
+Create a regexp to find all BB-tags with their contents.
+
+For instance:
+
+let reg = /your regexp/g;
+
+let str = "..[url]http://google.com[/url]..";
+alert( str.match(reg) ); // [url]http://google.com[/url]
+If tags are nested, then we need the outer tag (if we want we can continue the search in its content):
+
+let reg = /your regexp/g;
+
+let str = "..[url][b]http://google.com[/b][/url]..";
+alert( str.match(reg) ); // [url][b]http://google.com[/b][/url]
+
+
+
+121. Create a regexp to find strings in double quotes "...".
+
+The important part is that strings should support escaping, in the same way as JavaScript strings do. For instance, quotes can be inserted as \" a newline as \n, and the slash itself as \\.
+
+let str = "Just like \"here\".";
+For us it’s important that an escaped quote \" does not end a string.
+
+So we should look from one quote to the other ignoring escaped quotes on the way.
+
+That’s the essential part of the task, otherwise it would be trivial.
+
+Examples of strings to match:
+
+
+
+
+          
+
+       
+                               .. "test me" ..
+.. "Say \"Hello\"!" ... (escaped quotes inside)
+.. "\\" ..  (double slash inside)
+.. "\\ \"" ..  (double slash and an escaped quote inside)
+In JavaScript we need to double the slashes to pass them right into the string, like this:
+
+ let str = ' .. "test me" .. "Say \\"Hello\\"!" .. "\\\\ \\"" .. ';
+
+// the in-memory string
+alert(str); //  .. "test me" .. "Say \"Hello\"!" .. "\\ \"" ..
+
+
+
+
+122. Write a regexp to find the tag <style...>. It should match the full tag: it may have no attributes <style> or have several of them <style type="..." id="...">.
+
+…But the regexp should not match <styler>!
+
+For instance:
+
+let reg = /your regexp/g;
+
+alert( '<style> <styler> <style test="...">'.match(reg) ); // <style>, <style test="...">
+
+
+
+
+123. Implement Stack in JavaScript.
+
+
+124. Implement a Queue in Javascript.
+
+
+
+126. Create a regexp to find ellipsis: 3 (or more?) dots in a row.
+
+Check it:
+
+let reg = /your regexp/g;
+alert( "Hello!... How goes?.....".match(reg) ); // ..., .....
+
+
+
+127. Create a regexp to search HTML-colors written as #ABCDEF: first # and then 6 hexadimal characters.
+
+An example of use:
+
+let reg = /...your regexp.../
+
+let str = "color:#121212; background-color:#AA00ef bad-colors:f#fddee #fd2 #12345678";
+
+alert( str.match(reg) )  // #121212,#AA00ef
+P.S. In this task we do not need other color formats like #123 or rgb(1,2,3) etc.
+
+
+
+
+128. MAC-address of a network interface consists of 6 two-digit hex numbers separated by a colon.
+
+For instance: '01:32:54:67:89:AB'.
+
+Write a regexp that checks whether a string is MAC-address.
+
+Usage:
+
+let reg = /your regexp/;
+
+alert( reg.test('01:32:54:67:89:AB') ); // true
+
+alert( reg.test('0132546789AB') ); // false (no colons)
+
+alert( reg.test('01:32:54:67:89') ); // false (5 numbers, must be 6)
+
+alert( reg.test('01:32:54:67:89:ZZ') ) // false (ZZ ad the end)
+
+
+
+
+129. The time has a format: hours:minutes. Both hours and minutes has two digits, like 09:00.
+
+Make a regexp to find time in the string: Breakfast at 09:00 in the room 123:456.
+
+P.S. In this task there’s no need to check time correctness yet, so 25:99 can also be a valid result. P.P.S. The regexp shouldn’t match 123:456.
+
+
+
+130. Find all HTML comments in the text:
+
+let reg = /your regexp/g;
+
+let str = `... <!-- My -- comment
+ test --> ..  <!----> ..
+`;
+
+alert( str.match(reg) ); // '<!-- My -- comment \n test -->', '<!---->'
+
+
+
+131. Create a regular expression to find all (opening and closing) HTML tags with their attributes.
+
+An example of use:
+
+ let reg = /your regexp/g;
+
+let str = '<> <a href="/"> <input type="radio" checked> <b>';
+
+alert( str.match(reg) ); // '<a href="/">', '<input type="radio" checked>', '<b>'
+Let’s assume that may not contain < and > inside (in quotes too), that simplifies things a bit.
+
+
+
+132. For the following input string, write a regex that will find the last word in every line.
+
+let str = `1st place: Winnie
+2nd place: Piglet
+33rd place: Eeyore`;
+
+alert( str.match(/YOUR REGEX AND FLAGS/) ); // Winnie,Piglet,Eeyore
+
+
+
+133. Write a RegExp that matches colors in the format #abc or #abcdef. That is: # followed by 3 or 6 hexadecimal digits.
+
+Usage example:
+
+let reg = /your regexp/g;
+
+let str = "color: #3f3; background-color: #AA00ef; and: #abcd";
+
+alert( str.match(reg) ); // #3f3 #AA00ef
+P.S. This should be exactly 3 or 6 hex digits: values like #abcd should not match.
+
+
+
+134. Create a regexp that looks for positive numbers, including those without a decimal point.
+
+An example of use:
+
+let reg = /your regexp/g;
+
+let str = "1.5 0 -5 12. 123.4.";
+
+alert( str.match(reg) ); // 1.5, 12, 123.4 (ignores 0 and -5)
+
+
+
+135. Write a regexp that looks for all decimal numbers including integer ones, with the floating point and negative ones.
+
+An example of use:
+
+let reg = /your regexp/g;
+
+let str = "-1.5 0 2 -123.4.";
+
+alert( str.match(re) ); // -1.5, 0, 2, -123.4
+
+
+
+136. An arithmetical expression consists of 2 numbers and an operator between them, for instance:
+
+A) 1 + 2
+B) 1.2 * 3.4
+C) -3 / -6
+D) -2 - 2
+The operator is one of: "+", "-", "*" or "/".
+
+There may be extra spaces at the beginning, at the end or between the parts.
+
+Create a function parse(expr) that takes an expression and returns an array of 3 items:
+
+The first number.
+The operator.
+The second number.
+For example:
+
+let [a, op, b] = parse("1.2 * 3.4");
+
+alert(a); // 1.2
+alert(op); // *
+alert(b); // 3.4
+
+
+
+137. The time can be in the format hours:minutes or hours-minutes. Both hours and minutes have 2 digits: 09:00 or 21-30.
+
+Write a regexp to find time:
+
+let reg = /your regexp/g;
+alert( "Breakfast at 09:00. Dinner at 21-30".match(reg) ); // 09:00, 21-30
+P.S. In this task we assume that the time is always correct, there’s no need to filter out bad strings like “45:67”. Later we’ll deal with that too.
+
+
+
+
+138. Now let’s say we need not just a circle, but to show a message inside it. The message should appear after the animation is complete (the circle is fully grown), otherwise it would look ugly.
+
+In the solution of the task, the function showCircle(cx, cy, radius) draws the circle, but gives no way to track when it’s ready.
+
+Add a callback argument: showCircle(cx, cy, radius, callback) to be called when the animation is complete. The callback should receive the circle <div> as an argument.
+
+Here’s the example:
+
+showCircle(150, 150, 100, div => {
+  div.classList.add('message-ball');
+  div.append("Hello, world!");
+});
+
+
+
+
+139. The built-in function setTimeout uses callbacks. Create a promise-based alternative.
+
+The function delay(ms) should return a promise. That promise should resolve after ms milliseconds, so that we can add .then to it, like this:
+
+function delay(ms) {
+  // your code
+}
+
+delay(3000).then(() => alert('runs after 3 seconds'));
+
+
+
+140. Rewrite the showCircle function in the solution of the task Animated circle with callback so that it returns a promise instead of accepting a callback.
+
+The new usage:
+
+showCircle(150, 150, 100).then(div => {
+  div.classList.add('message-ball');
+  div.append("Hello, world!");
+});
+Take the solution of the task Animated circle with callback as the base.
+
+
+
+141. We’d like to fetch multiple URLs in parallel.
+
+Here’s the code to do that:
+
+ let urls = [
+  'https://api.github.com/users/iliakan',
+  'https://api.github.com/users/remy',
+  'https://api.github.com/users/jeresig'
+];
+
+Promise.all(urls.map(url => fetch(url)))
+  // for each response show its status
+  .then(responses => { // (*)
+    for(let response of responses) {
+      alert(`${response.url}: ${response.status}`);
+    }
+  });
+The problem is that if any of requests fails, then Promise.all rejects with the error, and we loose results of all the other requests.
+
+That’s not good.
+
+Modify the code so that the array responses in the line (*) would include the response objects for successful fetches and error objects for failed ones.
+
+For instance, if one of URLs is bad, then it should be like:
+
+let urls = [
+  'https://api.github.com/users/iliakan',
+  'https://api.github.com/users/remy',
+  'http://no-such-url'
+];
+
+Promise.all(...) // your code to fetch URLs...
+  // ...and pass fetch errors as members of the resulting array...
+  .then(responses => {
+    // 3 urls => 3 array members
+    alert(responses[0].status); // 200
+    alert(responses[1].status); // 200
+    alert(responses[2]); // TypeError: failed to fetch (text may vary)
+  });
+P.S. In this task you don’t have to load the full response using response.text() or response.json(). Just handle fetch errors the right way.
+
+
+
+142. Improve the solution of the previous task Fault-tolerant Promise.all. Now we need not just to call fetch, but to load the JSON objects from given URLs.
+
+Here’s the example code to do that:
+
+ let urls = [
+  'https://api.github.com/users/iliakan',
+  'https://api.github.com/users/remy',
+  'https://api.github.com/users/jeresig'
+];
+
+// make fetch requests
+Promise.all(urls.map(url => fetch(url)))
+  // map each response to response.json()
+  .then(responses => Promise.all(
+    responses.map(r => r.json())
+  ))
+  // show name of each user
+  .then(users => {  // (*)
+    for(let user of users) {
+      alert(user.name);
+    }
+  });
+The problem is that if any of requests fails, then Promise.all rejects with the error, and we loose results of all the other requests. So the code above is not fault-tolerant, just like the one in the previous task.
+
+Modify the code so that the array in the line (*) would include parsed JSON for successful requests and error for errored ones.
+
+Please note that the error may occur both in fetch (if the network request fails) and in response.json() (if the response is invalid JSON). In both cases the error should become a member of the results object.
+
+
+
+
+143. Below you can find the “rethrow” example from the chapter Promises chaining. Rewrite it using async/await instead of .then/catch.
+
+And get rid of the recursion in favour of a loop in demoGithubUser: with async/await that becomes easy to do.
+
+ class HttpError extends Error {
+  constructor(response) {
+    super(`${response.status} for ${response.url}`);
+    this.name = 'HttpError';
+    this.response = response;
+  }
+}
+
+function loadJson(url) {
+  return fetch(url)
+    .then(response => {
+      if (response.status == 200) {
+        return response.json();
+      } else {
+        throw new HttpError(response);
+      }
+    })
+}
+
+// Ask for a user name until github returns a valid user
+function demoGithubUser() {
+  let name = prompt("Enter a name?", "iliakan");
+
+  return loadJson(`https://api.github.com/users/${name}`)
+    .then(user => {
+      alert(`Full name: ${user.name}.`);
+      return user;
+    })
+    .catch(err => {
+      if (err instanceof HttpError && err.response.status == 404) {
+        alert("No such user, please reenter.");
+        return demoGithubUser();
+      } else {
+        throw err;
+      }
+    });
+}
+
+demoGithubUser();
+
+
+
+144. Rewrite the one of examples from the chapter Promises chaining using async/await instead of .then/catch:
+
+ function loadJson(url) {
+  return fetch(url)
+    .then(response => {
+      if (response.status == 200) {
+        return response.json();
+      } else {
+        throw new Error(response.status);
+      }
+    })
+}
+
+loadJson('no-such-user.json') // (3)
+  .catch(alert); // Error: 404
+  
+
+
+
+
+
+145. Plot a sine and cosine curve using Javascript.
+
+
+146. Write a JavaScript program to compare two objects to determine if the first one contains equivalent property values to the second one.
+
+
+147. Write a JavaScript program to converts a comma-separated values (CSV) string to a 2D array.
+
+148. Write a JavaScript program to convert a comma-separated values (CSV) string to a 2D array of objects. The first row of the string is used as the title row.
+
+149. Write a JavaScript program to converts a specified number to an array of digits.
+
+150. Write a JavaScript program to combine the numbers of a given array into an array containing all combinations. 
+
+
+151. Write a JavaScript program to extract out the values at the specified indexes from an specified array.
+
+
+152. Write a JavaScript program to generate a random hexadecimal color code.
+
+153. Write a JavaScript program to removes non-printable ASCII characters from a given string.
+
+154. Write a JavaScript program to convert the length of a given string in bytes.
+
+155. Write a JavaScript program to replace the names of multiple object keys with the values provided.
+
+156. Write a JavaScript program to return the minimum-maximum value of an array, after applying the provided function to set comparing rule.
+
+157. Write a JavaScript function that returns true if the provided predicate function returns true for all elements in a collection, false otherwise.
+
+158. Write a JavaScript program to split values of two given arrays into two groups. If an element in filter is truthy, the corresponding element in the collection belongs to the first group; otherwise, it belongs to the second group. 
+
+159. Write a JavaScript program to remove specified elements from the left of a given array of elements.
+
+160. Write a JavaScript program to remove specified elements from the right of a given array of elements.
+
+161. Write a JavaScript program to extend a 3-digit color code to a 6-digit color code.
+
+162. Write a JavaScript program to get every nth element in an given array. 
+
+163. Write a JavaScript program to filter out the non-unique values in an array.
+
+164. Write a JavaScript program to dcapitalize the first letter of a string.
+
+165. Write a JavaScript program to create a new array out of the two supplied by creating each possible pair from the arrays.
+
+166. Write a JavaScript program that will return true if the string is y/yes or false if the string is n/no.
+
+167. Write a JavaScript program to find every element that exists in any of the two given arrays once, using a provided comparator function.
+
+168. Write a JavaScript program to measure the time taken by a function to execute.
+
+169. Write a JavaScript program to convert a value to a safe integer.
+
+170. Write a JavaScript program to filter out the element(s) of an given array, that have one of the specified values. 
+
+171. Write a JavaScript function that reverse a number. Go to the editor
+Example x = 32243;
+Expected Output : 34223	
+
+172. Write a JavaScript function that checks whether a passed string is palindrome or not?
+A palindrome is word, phrase, or sequence that reads the same backward as forward, e.g., madam or nurses run.
+
+
+173. Write a JavaScript function that generates all combinations of a string.
+Example string : 'dog' 
+Expected Output : d,do,dog,o,og,g 
+
+
+174. Write a JavaScript function that returns a passed string with letters in alphabetical order.
+Example string : 'webmaster' 
+Expected Output : 'abeemrstw'
+Assume punctuation and numbers symbols are not included in the passed string.
+
+175. Write a JavaScript function that accepts a string as a parameter and converts the first letter of each word of the string in upper case.
+Example string : 'the quick brown fox' 
+Expected Output : 'The Quick Brown Fox '
+
+
+176. Write a JavaScript function that accepts a string as a parameter and find the longest word within the string.
+Example string : 'Spanidea Systems Private Limited'
+Expected Output : 'Development'
+
+
+177. Write a JavaScript function that accepts a string as a parameter and counts the number of vowels within the string.
+Note : As the letter 'y' can be regarded as both a vowel and a consonant, we do not count 'y' as vowel here. 
+Example string : 'The quick brown fox' 
+Expected Output : 5
+
+
+178. Write a JavaScript function that accepts a number as a parameter and check the number is prime or not.
+Note : A prime number (or a prime) is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+
+179. Write a JavaScript function which returns the n rows by n columns identity matrix.
+
+180. Write a JavaScript function which will take an array of numbers stored and find the second lowest and second greatest numbers, respectively.
+Sample array : [1,2,3,4,5]
+Expected Output : 2,4 
+
+
+181. Write a JavaScript function which says whether a number is perfect.
+According to Wikipedia : In number theory, a perfect number is a positive integer that is equal to the sum of its proper positive divisors, that is, the sum of its positive divisors excluding the number itself (also known as its aliquot sum). Equivalently, a perfect number is a number that is half the sum of all of its positive divisors (including itself).
+Example : The first perfect number is 6, because 1, 2, and 3 are its proper positive divisors, and 1 + 2 + 3 = 6. Equivalently, the number 6 is equal to half the sum of all its positive divisors: ( 1 + 2 + 3 + 6 ) / 2 = 6. The next perfect number is 28 = 1 + 2 + 4 + 7 + 14. This is followed by the perfect numbers 496 and 8128.
+
+
+182. Write a JavaScript function to convert an amount to coins.
+Sample function : amountTocoins(46, [25, 10, 5, 2, 1])
+Here 46 is the amount. and 25, 10, 5, 2, 1 are coins. 
+Output : 25, 10, 10, 1
+
+
+183. Write a JavaScript function to compute the value of bn where n is the exponent and b is the bases. Accept b and n from the user and display the result.
+
+184. Write a JavaScript function to extract unique characters from a string.
+Example string : "thequickbrownfoxjumpsoverthelazydog"
+Expected Output : "thequickbrownfxjmpsvlazydg"
+
+185. Write a JavaScript function to  get the number of occurrences of each letter in specified string.
+
+186. Write a function for searching JavaScript arrays with a binary search.
+Note : A binary search searches by splitting an array into smaller and smaller chunks until it finds the desired value.
+
+
+
+187. Write a JavaScript function that returns array elements larger than a number.
+e.g. let arr = [11, 45, 4, 31, 64, 10];
+
+188. Write a JavaScript function that generates a string id (specified length) of random characters.
+Sample character list : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+
+
+189. Write a JavaScript function that accepts two arguments, a string and a letter and the function will count the number of occurrences of the specified letter within the string.
+Sample arguments : 'w3resource.com', 'o' 
+Expected output : 2 
+
+
+190. Write a JavaScript function to find the first not repeated character.
+Sample arguments : 'abacddbec' 
+Expected output : 'e' 
+
+
+191. Write a JavaScript function to apply Bubble Sort algorithm.
+Note : According to wikipedia "Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that works by repeatedly stepping through the list to be sorted, comparing each pair of adjacent items and swapping them if they are in the wrong order". 
+Sample array : [12, 345, 4, 546, 122, 84, 98, 64, 9, 1, 3223, 455, 23, 234, 213]
+Expected output : [3223, 546, 455, 345, 234, 213, 122, 98, 84, 64, 23, 12, 9, 4, 1]
+
+
+192. Write a JavaScript function to find longest substring in a given a string without repeating characters.
+
+
+193. Write a JavaScript function that returns the longest palindrome in a given string.
+
+Note: According to Wikipedia "In computer science, the longest palindromic substring or longest symmetric factor problem is the problem of finding a maximum-length contiguous substring of a given string that is also a palindrome. For example, the longest palindromic substring of "bananas" is "anana". The longest palindromic substring is not guaranteed to be unique; for example, in the string "abracadabra", there is no palindromic substring with length greater than three, but there are two palindromic substrings with length three, namely, "aca" and "ada".
+In some applications it may be necessary to return all maximal palindromic substrings (that is, all substrings that are themselves palindromes and cannot be extended to larger palindromic substrings) rather than returning only one substring or returning the maximum length of a palindromic substring.
+
+
+194. Write a JavaScript program to find the greatest common divisor (gcd) of two positive numbers.
+
+195. Using Recursion write a JavaScript program to get the integers in range (x, y).
+Example : range(2, 9)
+Expected Output : [3, 4, 5, 6, 7, 8]
+
+196. Write a merge sort program in JavaScript.
+Sample array : [34,7,23,32,5,62]
+Sample output : [5, 7, 23, 32, 34, 62]
+
+
+197. Write a JavaScript program to sort a list of elements using Quick sort.
+Quick sort is a comparison sort, meaning that it can sort items of any type for which a "less-than" relation (formally, a total order) is defined.
+
+198. Write a JavaScript program to sort a list of elements using Heap sort.
+In computer science, heapsort (invented by J. W. J. Williams in 1964) is a comparison-based sorting algorithm. Heapsort can be thought of as an improved selection sort: like that algorithm, it divides its input into a sorted and an unsorted region, and it interactively shrinks the unsorted region by extracting the largest element and moving that to the sorted region. The improvement consists of the use of a heap data structure rather than a linear-time search to find the maximum. Although somewhat slower in practice on most machines than a well-implemented quicksort, it has the advantage of a more favorable worst-case O(n log n) runtime. Heapsort is an in-place algorithm, but it is not a stable sort.
+
+
+199. Write a JavaScript program to sort a list of elements using Insertion sort.
+Insertion sort is a simple sorting algorithm that builds the final sorted array (or list) one item at a time. It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge sort.
+
+
+200. Write a JavaScript program to sort a list of elements using the Selection sort algorithm.
+The selection sort improves on the bubble sort by making only one exchange for every pass through the list. 
+
+
+201. Write a JavaScript program to sort a list of elements using Shell sort.
+According to Wikipedia "Shell sort or Shell's method, is an in-place comparison sort. It can be seen as either a generalization of sorting by exchange (bubble sort) or sorting by insertion (insertion sort). The method starts by sorting pairs of elements far apart from each other, then progressively reducing the gap between elements to be compared. Starting with far apart elements can move some out-of-place elements into position faster than a simple nearest neighbor exchange."
+
+202. Write a JavaScript program to sort a list of elements using Cocktail shaker sort.
+Cocktail shaker sort (also known as bidirectional bubble sort, cocktail sort, shaker sort, ripple sort, shuffle sort, or shuttle sort ) is a variation of bubble sort that is both a stable sorting algorithm and a comparison sort. The algorithm differs from a bubble sort in that it sorts in both directions on each pass through the list. This sorting algorithm is only marginally more difficult to implement than a bubble sort, and solves the problem of turtles in bubble sorts. It provides only marginal performance improvements, and does not improve asymptotic performance; like the bubble sort, it is not of practical interest,, though it finds some use in education.
+
+
+203. Write a JavaScript program to sort a list of elements using Comb sort.
+The Comb Sort is a variant of the Bubble Sort. Like the Shell sort, the Comb Sort increases the gap used in comparisons and exchanges. Some implementations use the insertion sort once the gap is less than a certain amount. The basic idea is to eliminate turtles, or small values near the end of the list, since in a bubble sort these slow the sorting down tremendously. Rabbits, large values around the beginning of the list, do not pose a problem in bubble sort. 
+In bubble sort, when any two elements are compared, they always have a gap of 1. The basic idea of comb sort is that the gap can be much more than 1.
+
+
+
+204. Write a JavaScript program to sort a list of elements using Gnome sort.
+Gnome sort is a sorting algorithm originally proposed by Dr. Hamid Sarbazi-Azad (Professor of Computer Engineering at Sharif University of Technology) in 2000 and called "stupid sort"[1] (not to be confused with bogosort), and then later on described by Dick Grune and named "gnome sort".
+The algorithm always finds the first place where two adjacent elements are in the wrong order, and swaps them. It takes advantage of the fact that performing a swap can introduce a new out-of-order adjacent pair only next to the two swapped elements.
+
+
+205. Write a JavaScript program to sort a list of elements using Counting sort.
+According to Wikipedia "In computer science, counting sort is an algorithm for sorting a collection of objects according to keys that are small integers; that is, it is an integer sorting algorithm. It operates by counting the number of objects that have each distinct key value, and using arithmetic on those counts to determine the positions of each key value in the output sequence. Its running time is linear in the number of items and the difference between the maximum and minimum key values, so it is only suitable for direct use in situations where the variation in keys is not significantly greater than the number of items. However, it is often used as a subroutine in another sorting algorithm, radix sort, that can handle larger keys more efficiently".
+
+
+206. Write a JavaScript program to sort a list of elements using Flash sort.
+Flashsort is a distribution sorting algorithm showing linear computational complexity O(n) for uniformly distributed data sets and relatively little additional memory requirement. The original work was published in 1998 by Karl-Dietrich Neubert. The basic idea behind flashsort is that in a data set with a known distribution, it is easy to immediately estimate where an element should be placed after sorting when the range of the set is known.
+
+
+207. Write a JavaScript program to sort a list of elements using Pancake sort.
+Pancake sorting is the colloquial term for the mathematical problem of sorting a disordered stack of pancakes in order of size when a spatula can be inserted at any point in the stack and used to flip all pancakes above it. A pancake number is the minimum number of flips required for a given number of pancakes. The problem was first discussed by American geometer Jacob E. Goodman. It is a variation of the sorting problem in which the only allowed operation is to reverse the elements of some prefix of the sequence.
+
+
+
+
+208. Write a JavaScript program to sort a list of elements using Bogosort.
+In computer science, bogosort is a particularly ineffective sorting algorithm based on the generate and test paradigm. The algorithm successively generates permutations of its input until it finds one that is sorted. It is not useful for sorting, but may be used for educational purposes, to contrast it with other more realistic algorithms.
+
+
+209. Write a JavaScript program to pad a string on both sides with the specified character, if it's shorter than the specified length.
+
+
+210. Write a JavaScript program to curry (curries) a function
+
+According to wiki.haskell.org "Currying is the process of transforming a function that takes multiple arguments into a function that takes just a single argument and returns another function if any arguments are still needed. f x y = g (x,y), however the curried form is usually more convenient because it allows partial application.
+
+Note: Use recursion. If the number of provided arguments (args) is sufficient, call the passed function fn. Otherwise, return a curried function fn that expects the rest of the arguments. If you want to curry a function that accepts a variable number of arguments (a variadic function, e.g. Math.min()), you can optionally pass the number of arguments to the second parameter arity.
+
+
+
+211. Write a JavaScript program to perform a deep comparison between two values to determine if they are equivalent.
+
+Note: Check if the two values are identical, if they are both Date objects with the same time, using Date.getTime() or if they are both non-object values with an equivalent value (strict comparison). Check if only one value is null or undefined or if their prototypes differ. If none of the above conditions are met, use Object.keys() to check if both values have the same number of keys, then use Array.every() to check if every key in the first value exists in the second one and if they are equivalent by calling this method recursively.
+
+
+212. Write a JavaScript program to get an object containing the parameters of the provided URL.
+
+
+213. Write a JavaScript program to Join all given URL segments together, then normalizes the resulting URL.
+
+
+214. Write a JavaScript program to create a function that invokes fn with a given context, optionally adding any additional supplied parameters to the beginning of the arguments.
+
+
+215. Write a JavaScript program to chain asynchronous functions.
+Note: Loop through an array of functions containing asynchronous events, calling next when each asynchronous event has completed.
+
+
+216. Write a JavaScript program to perform right-to-left function composition.
+E.g.: const multiplyAndAdd5 = compose(
+  add5,
+  multiply
+);
+console.log(multiplyAndAdd5(5, 2)); 
+
+Write JavaScript function add5(), multiply(), and compose() so that the functions passed to compose function are executed/evaluated from right to left. Which means, multiply() is executed before add5().
+
+217. Write a JavaScript program that accepts a converging function and a list of branching functions and returns a function that applies each branching function to the arguments and the results of the branching functions are passed as arguments to the converging function. 
+E.g.: Create a function converge() which takes two arguments:
+	a. a converger function - average function
+	b. array of functions
+		i. to calculate sum of all integers of an array
+		ii. to return the length of the integer array
+
+	Call to the function should be as follows:
+	
+	1. console.log(average([ 6, 7])); //6.5 -- output
+	2. console.log(average([1, 2, 3, 4, 5, 6, 7])); //4 -- output
+	
+
+
+218. Write a JavaScript program to group the elements of an array based on the given function and returns the count of elements in each group.
+
+console.log(countBy([6, 10, 100, 10], Math.sqrt)); 			// {"10":1,"2.449489742783178":1,"3.1622776601683795":2}
+console.log(countBy([6.1, 4.2, 6.3], Math.floor)); 			// {"4":1,"6":2}
+console.log(countBy(['one', 'two', 'three'], 'length'));	// {"3":2,"5":1}
+
+
+219. Write a JavaScript program to create a deep clone of an object.
+
+220. Write a JavaScript program to detect whether the website is being opened in a mobile device or a desktop/laptop.
+
+
+221. Write a JavaScript program to compute the new ratings between two or more opponents using the Elo rating system. It takes an array of pre-ratings and returns an array containing post-ratings. The array should be ordered from best performer to worst performer (winner -> loser).
+
+Note: Use the exponent ** operator and math operators to compute the expected score (chance of winning). of each opponent and compute the new rating for each. Loop through the ratings, using each permutation to compute the post-Elo rating for each player in a pairwise fashion. Omit the second argument to use the default kFactor of 32.
+
+222. Write a JavaScript program to take any number of iterable objects or objects with a length property and returns the longest one.
+
+223. Write a JavaScript program to implement the Luhn Algorithm used to validate a variety of identification numbers, such as credit card numbers, IMEI numbers, National Provider Identifier numbers etc.
+
+224. Write a JavaScript program to unescape escaped HTML characters.
+
+
+225. Write a JavaScript program to uncurry a function up to depth n.
+
+226. Write a JavaScript program to reduce a given Array-like into a value hash (keyed data store).
+
+Note: Given an Iterable or Array-like structure, call Array.prototype.reduce.call() on the provided object to step over it and return an Object, keyed by the reference value.
+
+227. Write a JavaScript program to get the symmetric difference between two given arrays, using a provided function as a comparator.
+
+
+228. Write a JavaScript program to split a multiline string into an array of lines.
+
+229. Write a JavaScript program to serialize a cookie name-value pair into a Set-Cookie header string.
+
+230. Write a JavaScript program to get a random element from an array.
+
+
+231. Write a JavaScript function to parameterize a string.
+
+Test Data:
+console.log(string_parameterize("Robin Singh from USA."));
+"robin-singh-from-usa"
+
+232. Write a JavaScript function to humanized number (Formats a number to a human-readable string.) with the correct suffix such as 1st, 2nd, 3rd or 4th.
+
+Test Data:
+console.log(humanize_format()); 
+console.log(humanize_format(1)); 
+console.log(humanize_format(8)); 
+console.log(humanize_format(301)); 
+console.log(humanize_format(402)); 
+"1st" 
+"8th" 
+"301st" 
+"402nd"
+
+
+233. Write a JavaScript function to chop a string into chunks of a given length. Go to the editor
+Test Data :
+console.log(string_chop('w3resource')); 
+console.log(string_chop('w3resource',2)); 
+console.log(string_chop('w3resource',3));
+["w3resource"] 
+["w3", "re", "so", "ur", "ce"] 
+["w3r", "eso", "urc", "e"]
+
+
+234. Write a JavaScript function to escapes special characters (&, <, >, ', ") for use in HTML.
+Test Data :
+console.log(escape_html('PHP & MySQL')); 
+"PHP &amp; MySQL"
+console.log(escape_html('3 > 2'));
+"3 &gt; 2"
+
+
+235. Write a JavaScript function to remove?non-printable ASCII chars.
+Test Data :
+console.log(remove_non_ascii('äÄçÇéÉêPHP-MySQLöÖÐþúÚ'));
+"PHP-MySQL"
+
+
+236. Write a JavaScript function to remove non-word characters.
+Test Data :
+console.log(remove_non_word('PHP ~!@#$%^&*()+`-={}[]|\\:";\'/?><., MySQL')); 
+"PHP - MySQL"
+
+
+237. Write a JavaScript function to convert a string to title case.
+
+Test Data:
+console.log(sentenceCase('PHP exercises. python exercises.')); 
+"Php Exercises. Python Exercises."
+
+
+238. Write a JavaScript function to remove HTML/XML tags from string.
+Test Data :
+console.log(strip_html_tags('<p><strong><em>PHP Exercises</em></strong></p>'));
+"PHP Exercises"
+
+239. Write a JavaScript function to test case insensitive (except special Unicode characters) string comparison.
+Test Data :
+console.log(compare_strings('abcd', 'AbcD')); 
+true
+console.log(compare_strings('ABCD', 'Abce'));
+false
+
+
+240. Write a JavaScript function to create a case-insensitive search.
+Test Data :
+console.log(case_insensitive_search('JavaScript Exercises', 'exercises')); 
+"Matched"
+console.log(case_insensitive_search('JavaScript Exercises', 'Exercises')); 
+"Matched"
+console.log(case_insensitive_search('JavaScript Exercises', 'Exercisess')); 
+"Not Matched"
+
+241. Write a JavaScript function to get the successor of a string.
+
+Note: The successor is calculated by incrementing characters starting from the rightmost alphanumeric (or the rightmost character if there are no alphanumerics) in the string. Incrementing a digit always results in another digit, and incrementing a letter results in another letter of the same case. If the increment generates a carry, the character to the left of it is incremented. This process repeats until there is no carry, adding an additional character if necessary.
+Example : 
+string.successor("abcd") == "abce"
+string.successor("THX1138") == "THX1139"
+string.successor("< >") == "< >"
+string.successor("1999zzz") == "2000aaa"
+string.successor("ZZZ9999") == "AAAA0000"
+
+Test Data : 
+console.log(successor('abcd'));
+console.log(successor('3456'));
+"abce"
+"3457"
+
+
+242. Write a JavaScript function to get unique guid (an acronym for 'Globally Unique Identifier?) of the specified length, or 32 by default. Go to the editor
+Test Data :
+console.log(guid());
+console.log(guid(15));
+"hRYilcoV7ajokxsYFl1dba41AyE0rUQR"
+"b7pwBqrZwqaDrex"
+
+243. Write a JavaScript function to convert a decimal number to binary, hexadecimal or octal number.
+Test Data :
+console.log(dec_to_bho(120,'B')); 
+console.log(dec_to_bho(120,'H')); 
+console.log(dec_to_bho(120,'O'));
+"1111000" 
+"78" 
+"170"
+
+244. Write a JavaScript function to generate a random integer.
+Test Data :
+console.log(rand(20,1)); 
+console.log(rand(1,10)); 
+console.log(rand(6)); 
+console.log(rand()); 
+15 
+5 
+1 
+0
+
+
+245. Write a JavaScript function to get the least common multiple (LCM) of two numbers. Go to the editor
+Note : 
+According to Wikipedia - A common multiple is a number that is a multiple of two or more integers. The common multiples of 3 and 4 are 0, 12, 24, .... The least common multiple (LCM) of two numbers is the smallest number (not zero) that is a multiple of both.
+Test Data :
+console.log(lcm_two_numbers(3,15)); 
+console.log(lcm_two_numbers(10,15));
+Output :
+15 
+30
+
+246. Write a JavaScript function to test if a number is a power of 2.
+
+Test Data:
+console.log(power_of_2(16)); 
+console.log(power_of_2(18)); 
+console.log(power_of_2(256));
+Output:
+true 
+false 
+true
+
+
+247. Create a Pythagorean function in JavaScript.
+Note : The Pythagorean Theorem tells us that the relationship in every right triangle is : c2 = a2 + b2, where c is the hypotenuse and a, b are two legs of the triangle. 
+Test Data :
+console.log(pythagorean_theorem(2, 4)); 
+console.log(pythagorean_theorem(3, 4));
+Output :
+4.47213595499958 
+5
+
+
+248. Write a JavaScript program to evaluate binomial coefficients. Go to the editor
+Note : 
+Binomial coefficient : According to Wikipedia - In mathematics, binomial coefficients are a family of positive integers that occur as coefficients in the binomial theorem. They are indexed by two nonnegative integers; the binomial coefficient indexed by n and k. Under suitable circumstances the value of the coefficient is given by the expression : 
+binomial coefficients 
+Arranging binomial coefficients into rows for successive values of n, and in which k ranges from 0 to n, gives a triangular array called Pascal's triangle.
+
+Test Data :
+console.log(binomial(8,3)); 
+console.log(binomial(10,2));
+Output :
+56 
+45
+
+249. Write a JavaScript function that Convert an integer into a Roman Numeral in javaScript.
+
+
+250. Write a JavaScript function that Convert Roman Numeral to Integer.
+
+
+251. Write a JavaScript function to create a UUID identifier.
+
+Note : 
+According to Wikipedia - A universally unique identifier (UUID) is an identifier standard used in software construction. A UUID is simply a 128-bit value. The meaning of each bit is defined by any of several variants. For human-readable display, many systems use a canonical format using hexadecimal text with inserted hyphen characters. For example : de305d54-75b4-431b-adb2-eb6b9e546014
+
+
+252. Write a JavaScript function to calculate degrees between 2 points with inverse Y axis.
+Test Data : 
+console.log(pointDirection(1, 0, 12, 0));
+0
+console.log(pointDirection(1, 0, 1, 10));
+90
+
+253. Write a JavaScript function to print an integer with commas as thousands separators.
+Test Data :
+console.log(thousands_separators(1000)); 
+"1,000"
+console.log(thousands_separators(10000.23)); 
+"10,000.23"
+console.log(thousands_separators(100000));
+"100,000"
+
+
+254. Write a JavaScript function to calculate the combination of n and r.
+The formula is : n!/(r!*(n - r)!).
+Test Data : 
+console.log(combinations(6, 2)); 
+15
+console.log(combinations(5, 3));
+10
+
+255. Write a JavaScript function to show the first twenty Hamming numbers.
+
+Hamming Numbers are numbers whose only prime factors are 2, 3 and 5.
+
+
+256. Write a JavaScript function to calculate the extended Euclid Algorithm or extended GCD.
+
+In mathematics, the Euclidean algorithm[a], or Euclid's algorithm, is an efficient method for computing the greatest common divisor (GCD) of two numbers, the largest number that divides both of them without leaving a remainder. It is named after the ancient Greek mathematician Euclid, who first described it in Euclid's Elements. It is an example of an algorithm, a step-by-step procedure for performing a calculation according to well-defined rules, and is one of the oldest algorithms in common use. It can be used to reduce fractions to their simplest form, and is a part of many other number-theoretic and cryptographic calculations.
+
+
+257. Write a JavaScript function to calculate Lanczos approximation gamma.
+
+In mathematics, the Lanczos approximation is a method for computing the Gamma function numerically, published by Cornelius Lanczos in 1964. It is a practical alternative to the more popular Stirling's approximation for calculating the Gamma function with fixed precision.
+
+
+
+258. Write a JavaScript program to add two complex numbers.
+A complex number is a number that can be expressed in the form a + bi, where a and b are real numbers and i is the imaginary unit, that satisfies the equation i2 = −1. In this expression, a is the real part and b is the imaginary part of the complex number.
+
+
+259. Write a JavaScript program to divide two complex numbers.
+A complex number is a number that can be expressed in the form a + bi, where a and b are real numbers and i is the imaginary unit, that satisfies the equation i2 = −1. In this expression, a is the real part and b is the imaginary part of the complex number.
+
+
+
+260. Write a JavaScript program to multiply two complex numbers.
+A complex number is a number that can be expressed in the form a + bi, where a and b are real numbers and i is the imaginary unit, that satisfies the equation i2 = −1. In this expression, a is the real part and b is the imaginary part of the complex number.
