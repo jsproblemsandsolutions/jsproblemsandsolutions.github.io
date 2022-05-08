@@ -3,13 +3,16 @@ body{
 		font-size: 15px;
 	}
 	.main-header{
-		display: inline-block;
-		width: 100%;
-		text-align: center;
+		/* display: inline-block; */
+		/* width: 100%; */
+		/* text-align: center; */
 		font-size: 40px;
 		color: #009999;
 		/*padding: 50px 0 10px 0;*/
 		text-transform: uppercase;
+	}
+	.main-header a, .main-header a:hover, .main-header a:active {
+		text-decoration: none;
 	}
 	.html-assignments .col-sm-2{
 		min-height: 60px;
@@ -71,5 +74,20 @@ body{
 		}
 		
 	}
-	
-	
+
+	.technology-block {
+		height: 60px;
+		text-align: center;
+		vertical-align: middle;
+		line-height: 60px;
+		background-color: #009999;
+		color: #fff;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+
+.sub-topics{
+	list-style: square;
+	margin-left: 2.5em;
+}
